@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "contact.h"
 
-int main() {
+int main()
+ {
     int choice;
     AddressBook addressBook;
     initialize(&addressBook); // Initialize the address book
@@ -16,10 +17,12 @@ int main() {
         printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-        
+    
+
         switch (choice) {
             case 1:
                 createContact(&addressBook);
+                printf("Details Succesfully stored!..\n");
                 break;
             case 2:
                 searchContact(&addressBook);
@@ -49,5 +52,5 @@ int main() {
         }
     } while (choice != 6);
     
-       return 0;
+    return 0;
 }
