@@ -5,6 +5,11 @@
 #include "file.h"
 #include "populate.h"
 
+//Function prototype
+int is_alpha(char*);
+int is_digit(char*);
+int is_ID(char*);
+int count_num(char*);
 
 
 
@@ -27,11 +32,6 @@ void saveAndExit(AddressBook *addressBook) {
     exit(EXIT_SUCCESS); // Exit the program
 }
 
-//Function prototype
-int is_alpha(char*);
-int is_digit(char*);
-int is_ID(char*);
-int count_num(char*);
 
 void createContact(AddressBook *addressBook)
 {
