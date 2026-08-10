@@ -16,12 +16,49 @@ int count_num(char*);
 void listContacts(AddressBook *addressBook, int sortCriteria) 
 {
     // Sort contacts based on the chosen criteria
-    
+    user_list:
+      if(sortCriteria == 1)
+        {
+            printf("        *=======================================*\n");
+            printf("                        Name:-\n");
+            for(int i = 0;i < addressBook -> contactCount; i++)
+            {
+                printf("%14d%15s\n", i+1, addressBook ->contacts[i].name);
+            }
+            printf("        *=========================================*\n");
+        }
+        else if(sortCriteria == 2)
+        {
+            printf("        *======================================*\n");
+            printf("                    Phone.no:-\n");
+            for(int i = 0;i < addressBook -> contactCount; i++)
+            {
+            printf("%14d%15s\n", i+1, addressBook ->contacts[i].phone);
+            }
+            printf("        *======================================*\n");
+        }
+        else if(sortCriteria == 3)
+        {
+            printf("    *======================================================*\n");
+            printf("                          Email_ID:-\n");
+            for(int i = 0;i < addressBook -> contactCount; i++)
+            {
+            printf("%18d%20s\n", i+1, addressBook ->contacts[i].email);
+            }
+            printf("     *======================================================*\n");
+        }
+        else
+        {
+            printf("Invalid Input, Try again...,\n");
+            goto user_list;
+        }
+
 }
+    
 
 void initialize(AddressBook *addressBook) {
     addressBook->contactCount = 0;
-    //populateAddressBook(addressBook);
+    populateAddressBook(addressBook);
     
     // Load contacts from file during initialization (After files)
     //loadContactsFromFile(addressBook);
