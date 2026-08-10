@@ -25,7 +25,14 @@ int main()
                 printf("Details Succesfully stored!..\n");
                 break;
             case 2:
-                searchContact(&addressBook);
+                printf("Select search criteria:\n");
+                printf("1. Search by name\n");
+                printf("2. Search by phone\n");
+                printf("3. Search by email\n");
+                printf("Enter your choice: ");
+                int searchChoice;
+                scanf("%d", &searchChoice);
+                searchContact(&addressBook, searchChoice);
                 break;
             case 3:
                 editContact(&addressBook);

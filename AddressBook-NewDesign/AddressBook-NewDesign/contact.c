@@ -148,9 +148,34 @@ void createContact(AddressBook *addressBook)
     }
 }
 
-void searchContact(AddressBook *addressBook) 
+void searchContact(AddressBook *addressBook, int searchChoice) 
 {
     /* Define the logic for search */
+
+    user_searchname: //Adding label to return 
+    //declaration of temporary veriables
+    char temp[50];
+    int flag = 0;
+    if(searchChoice == 1) //Searching name in contacts
+    {
+        printf("Enter the name: "); 
+
+        getchar();
+        fgets(temp,sizeof(temp),stdin); //Getting name from the user to search 
+        temp[strcspn(temp,"\n")] = '\0'; //adding null by replacing \n
+
+        //Function call to check the name is valid or nor
+        flag = is_alpha(temp);
+        
+        if(flag)
+        {
+            printf("Invalid name, Enter again...,\n");
+            goto user_searchname; //returning the pgm from top 
+        }
+        //Function call
+        search_name(addressBook -> contacts[addressBook -> contactCount].name, temp);  
+    }
+
 }
 
 void editContact(AddressBook *addressBook)
@@ -239,4 +264,19 @@ int is_ID(char *p) //For checking valid email id or not
     }
 
     return 0;
+}
+
+void search_name(char *src, char *des)
+{
+    while(*src != '\0')
+    {
+        if(strcmp(src, des) != 0)
+        {
+            src++;
+        }
+        else if(strcmp(src, des) == 0)
+        {
+        
+        }
+    }
 }
