@@ -16,8 +16,8 @@ int count_num(char*);
 void listContacts(AddressBook *addressBook, int sortCriteria) 
 {
     // Sort contacts based on the chosen criteria
-    user_list:
-      if(sortCriteria == 1)
+    user_list: //goto label
+      if(sortCriteria == 1) //for printing all name's
         {
             printf("        *=======================================*\n");
             printf("                        Name:-\n");
@@ -27,7 +27,7 @@ void listContacts(AddressBook *addressBook, int sortCriteria)
             }
             printf("        *=========================================*\n");
         }
-        else if(sortCriteria == 2)
+        else if(sortCriteria == 2) //For printing all mobile numbers 
         {
             printf("        *======================================*\n");
             printf("                    Phone.no:-\n");
@@ -37,7 +37,7 @@ void listContacts(AddressBook *addressBook, int sortCriteria)
             }
             printf("        *======================================*\n");
         }
-        else if(sortCriteria == 3)
+        else if(sortCriteria == 3) //for printing all email id's
         {
             printf("    *======================================================*\n");
             printf("                          Email_ID:-\n");
@@ -50,7 +50,7 @@ void listContacts(AddressBook *addressBook, int sortCriteria)
         else
         {
             printf("Invalid Input, Try again...,\n");
-            goto user_list;
+            goto user_list; //using goto
         }
 
 }
@@ -72,7 +72,7 @@ void saveAndExit(AddressBook *addressBook) {
 
 void createContact(AddressBook *addressBook)
 {
-    int flag = 0;
+    int flag = 0; //declaraing flag as zero 
 	/* Define the logic to create a Contacts */
     if(addressBook -> contactCount < MAX_CONTACTS) //Checking the space is availabe to store the details
     {
@@ -144,7 +144,7 @@ void createContact(AddressBook *addressBook)
     }
     else
     {
-        printf("Address Book is Full...\n");
+        printf("Address Book is Full...\n"); //printing the message
     }
 }
 
@@ -181,7 +181,7 @@ int is_alpha(char *p) //For checking the valid name or not
     return 0;
 }
 
-int is_digit(char *p)
+int is_digit(char *p) //For checking valid mobile number or not
 {
     while(*p != '\0')
     {
@@ -214,7 +214,7 @@ int count_num(char *p) //Checking whether there are 10 numbers or not
     return 0;
 }
 
-int is_ID(char *p)
+int is_ID(char *p) //For checking valid email id or not
 {
     //Declaration 
     int at_count = 0;
