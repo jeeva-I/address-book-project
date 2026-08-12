@@ -29,6 +29,7 @@ int main()
                 printf("1. Search by name\n");
                 printf("2. Search by phone\n");
                 printf("3. Search by email\n");
+                printf("4. Exit\n");
                 printf("Enter your choice: ");
                 int searchChoice;
                 scanf("%d", &searchChoice);
@@ -36,6 +37,14 @@ int main()
                 break;
             case 3:
                 editContact(&addressBook);
+                printf("Select search criteria:\n");
+                printf("1. Search by name\n");
+                printf("2. Search by phone\n");
+                printf("3. Search by email\n");
+                printf("4. Exit\n");
+                printf("Enter your choice: ");
+                int e_searchChoice;
+                editContact(&addressBook, e_searchChoice);
                 break;
             case 4:
                 deleteContact(&addressBook);
@@ -45,6 +54,7 @@ int main()
                 printf("1. Sort by name\n");
                 printf("2. Sort by phone\n");
                 printf("3. Sort by email\n");
+                printf("4. Show all\n");
                 printf("Enter your choice: ");
                 int sortChoice;
                 scanf("%d", &sortChoice);
@@ -52,7 +62,7 @@ int main()
                 break;
             case 6:
                 printf("Saving and Exiting...\n");
-                //saveContactsToFile(&addressBook);
+                saveContactsToFile(&addressBook);
                 break;
             default:
                 printf("Invalid choice. Please try again.\n");
