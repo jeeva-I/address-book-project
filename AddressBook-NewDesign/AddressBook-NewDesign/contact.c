@@ -280,17 +280,116 @@ void searchContact(AddressBook *addressBook, int searchChoice)
 
 void editContact(AddressBook *addressBook, int e_searchChoice)
 {
+    user_editcontact:
 	/* Define the logic for Editcontact */
-    //search function
-    if(e_searchChoice == 1)
-    {
-        printf("");
-        //function call
-        index = search_name(AddressBook *addressBook, char *name)
-    }
-    
+     char var[50]; //Declaring temporary variable
+     int flag = 0;
+     int index;
+     int choice;
+     //search function
+     if(e_searchChoice == 1)
+     {   
+        user_esearch_name:
+         printf("Enter the Name to edit: ");
+         getchar();
+         fgets(var,sizeof(var),stdin); //Getting input from the user
+         var[strcspn(var,"\n")] = '\0'; 
+
+         flag = is_alpha(var); // function call 
+         //for name validation
+         if(flag)
+         {
+            printf("Invalid name, Try again...\n");
+            goto user_esearch_name;
+         }
+         //function call
+        index = search_name(addressBook, var);
+
+        //Validation for name
+        if(index == -1)
+        {
+            printf("No matches found, Try again!...\n"); //
+            goto user_esearch_name;
+        }
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+        printf("      Name            Phoneno            email_Id\n");
+        printf("%12s%18s%23s\n", addressBook -> contacts[index].name,  addressBook -> contacts[index].phone, addressBook -> contacts[index].email);
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+
+        //Function call
+        edit_option(&addressBook -> contacts[index]);   
+     }
+     else if(e_searchChoice == 2)
+     {
+        user_esearch_number:
+         printf("Enter the number to edit: ");
+         fgets(var,sizeof(var),stdin); //Getting input from the user
+         var[strcspn(var,"\n")] = '\0'; 
+
+        //  flag = count_num(var); // function call 
+        //  //for 10 number validation
+         if(count_num(var) || is_digit(var))
+          {
+             printf("Invalid Number, Try again...\n");
+             goto user_esearch_number;
+          }
+       //function call
+        index = search_number(addressBook, var);
+
+        //Validation for name
+        if(index == -1)
+        {
+            printf("No matches found, Try again!...\n"); //
+            goto user_esearch_number;
+        }
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+        printf("      Name            Phoneno            email_Id\n");
+        printf("%12s%18s%23s\n", addressBook -> contacts[index].name,  addressBook -> contacts[index].phone, addressBook -> contacts[index].email);
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+
+        //Function call
+        edit_option(&addressBook -> contacts[index]);   
+     }
+     else if(e_searchChoice == 3)
+     {
+        user_esearch_mail:
+         printf("Enter the mail to edit: ");
+         fgets(var,sizeof(var),stdin); //Getting input from the user
+         var[strcspn(var,"\n")] = '\0'; 
 
 
+         //function call
+        index = search_mail(addressBook, var);
+
+        //Validation for name
+        if(index == -1)
+        {
+            printf("No matches found, Try again!...\n"); //
+            goto user_esearch_mail;
+        }
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+        printf("      Name            Phoneno            email_Id\n");
+        printf("%12s%18s%23s\n", addressBook -> contacts[index].name,  addressBook -> contacts[index].phone, addressBook -> contacts[index].email);
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+
+        //Function call
+        edit_option(&addressBook -> contacts[index]);   
+     }
+     else if(e_searchChoice == 4)
+     {
+        return;
+     }
+     else
+     {
+        printf("Invalid choice, Try again...\n");
+        goto user_editcontact;
+     }
     }
 
 void deleteContact(AddressBook *addressBook)
@@ -411,3 +510,83 @@ int search_mail(AddressBook *addressBook, char *ID) //For checking the Mail_ID i
    return -1;
 }
 
+void edit_option(Contact *contact) //for show the edit option to the user
+{   
+    user_editoption:
+    //getting the choice from user
+    printf("Select the option to edit\n");
+    printf("1. Edit name\n");
+    printf("2. Edit Phone_no\n");
+    printf("3. Edit Email\n");
+    printf("4. Exit\n");
+    printf("Enter the choice\n");
+    int choice; //declaring variable to save the choice
+    scanf("%d", &choice);
+    
+    char temp[50];
+    int flag = 0;
+    if(choice == 1)
+    {   
+        user_editname:
+        printf("Enter the New name: ");
+        getchar();
+        fgets(temp,sizeof(temp),stdin);
+        temp[strcspn(temp,"\n")] = '\0';
+
+        //Function call
+        flag = is_alpha(temp);
+
+        //name validation 
+        if(flag)
+        {
+            printf("Enter the valid new name\n");
+            goto user_editname;
+        }
+        strcpy(contact -> name,temp);
+        printf("Name Modified Successfully!\n");
+    }
+    else if(choice == 2)
+    {
+        user_editnumber:
+        printf("Enter the New number: ");
+        fgets(temp,sizeof(temp),stdin);
+        temp[strcspn(temp,"\n")] = '\0';
+
+        
+        if(count_num(temp) || is_digit(temp))
+        {
+            printf("Enter the valid new number\n");
+            goto user_editnumber;
+        }
+        strcpy( contact -> phone,temp);
+        printf("Phone no Modified Successfully!\n");
+    }
+    else if(choice == 3)
+    {
+        user_editmail:
+        printf("Enter the New mail_Td: ");
+        fgets(temp,sizeof(temp),stdin);
+        temp[strcspn(temp,"\n")] = '\0';
+
+        //Function call
+        flag = is_ID(temp);
+
+        //name validation 
+        if(flag)
+        {
+            printf("Enter the valid new mail ID\n");
+            goto user_editmail;
+        }
+        strcpy(contact-> email,temp);
+        printf("Email Id Modified Successfully!\n");
+    }
+    else if(choice == 4)
+    {
+        return;
+    }
+    else
+    {
+        printf("Invalid Choice, Try again...\n");
+        goto user_editoption;
+    }
+}

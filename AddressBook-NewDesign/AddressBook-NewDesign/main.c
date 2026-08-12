@@ -36,7 +36,6 @@ int main()
                 searchContact(&addressBook, searchChoice);
                 break;
             case 3:
-                editContact(&addressBook);
                 printf("Select search criteria:\n");
                 printf("1. Search by name\n");
                 printf("2. Search by phone\n");
@@ -44,6 +43,7 @@ int main()
                 printf("4. Exit\n");
                 printf("Enter your choice: ");
                 int e_searchChoice;
+                scanf("%d", &e_searchChoice);
                 editContact(&addressBook, e_searchChoice);
                 break;
             case 4:

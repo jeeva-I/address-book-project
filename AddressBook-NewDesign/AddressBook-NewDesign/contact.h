@@ -20,6 +20,7 @@ int search_name(AddressBook*,char*);
 int search_number(AddressBook*,char*);
 int search_mail(AddressBook*,char*);
 void editContact(AddressBook *addressBook, int);
+void edit_option(Contact *contact);
 void deleteContact(AddressBook *addressBook);
 void listContacts(AddressBook *addressBook, int sortCriteria);
 void initialize(AddressBook *addressBook);
