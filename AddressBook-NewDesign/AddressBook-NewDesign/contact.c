@@ -285,7 +285,6 @@ void editContact(AddressBook *addressBook, int e_searchChoice)
      char var[50]; //Declaring temporary variable
      int flag = 0;
      int index;
-     int choice;
      //search function
      if(e_searchChoice == 1)
      {   
@@ -392,9 +391,118 @@ void editContact(AddressBook *addressBook, int e_searchChoice)
      }
     }
 
-void deleteContact(AddressBook *addressBook)
+void deleteContact(AddressBook *addressBook, int d_search)
 {
 	/* Define the logic for deletecontact */
+    user_deletecontact:
+	/* Define the logic for Editcontact */
+     char var[50]; //Declaring temporary variable
+     int flag = 0;
+     int index;
+     //search function
+     if(d_search == 1)
+     {   
+        user_dsearch_name:
+         printf("Enter the Name to delete: ");
+         getchar();
+         fgets(var,sizeof(var),stdin); //Getting input from the user
+         var[strcspn(var,"\n")] = '\0'; 
+
+         flag = is_alpha(var); // function call 
+         //for name validation
+         if(flag)
+         {
+            printf("Invalid name, Try again...\n");
+            goto user_dsearch_name;
+         }
+         //function call
+        index = search_name(addressBook, var);
+
+        //Validation for name
+        if(index == -1)
+        {
+            printf("No matches found, Try again!...\n"); //
+            goto user_dsearch_name;
+        }
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+        printf("      Name            Phoneno            email_Id\n");
+        printf("%12s%18s%23s\n", addressBook -> contacts[index].name,  addressBook -> contacts[index].phone, addressBook -> contacts[index].email);
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+
+        //Function call
+        delete_option(addressBook, index);   
+     }
+     else if(d_search == 2)
+     {
+        user_dsearch_number:
+         printf("Enter the number to delete: ");
+         fgets(var,sizeof(var),stdin); //Getting input from the user
+         var[strcspn(var,"\n")] = '\0'; 
+
+        //  flag = count_num(var); // function call 
+        //  //for 10 number validation
+         if(count_num(var) || is_digit(var))
+          {
+             printf("Invalid Number, Try again...\n");
+             goto user_dsearch_number;
+          }
+       //function call
+        index = search_number(addressBook, var);
+
+        //Validation for name
+        if(index == -1)
+        {
+            printf("No matches found, Try again!...\n"); //
+            goto user_dsearch_number;
+        }
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+        printf("      Name            Phoneno            email_Id\n");
+        printf("%12s%18s%23s\n", addressBook -> contacts[index].name,  addressBook -> contacts[index].phone, addressBook -> contacts[index].email);
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+
+        //Function call
+        delete_option(addressBook, index);   
+     }
+     else if(d_search == 3)
+     {
+        user_dsearch_mail:
+         printf("Enter the mail to delete: ");
+         fgets(var,sizeof(var),stdin); //Getting input from the user
+         var[strcspn(var,"\n")] = '\0'; 
+
+
+         //function call
+        index = search_mail(addressBook, var);
+
+        //Validation for name
+        if(index == -1)
+        {
+            printf("No matches found, Try again!...\n"); //
+            goto user_dsearch_mail;
+        }
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+        printf("      Name            Phoneno            email_Id\n");
+        printf("%12s%18s%23s\n", addressBook -> contacts[index].name,  addressBook -> contacts[index].phone, addressBook -> contacts[index].email);
+        printf("------------------------------------------------------------\n");
+        printf("------------------------------------------------------------\n");
+
+        //Function call
+        delete_option(addressBook, index);    
+     }
+     else if(d_search == 4)
+     {
+        return;
+     }
+     else
+     {
+        printf("Invalid choice, Try again...\n");
+        goto user_deletecontact;
+     }
    
 }
 
@@ -590,3 +698,33 @@ void edit_option(Contact *contact) //for show the edit option to the user
         goto user_editoption;
     }
 }
+
+void delete_option(AddressBook *addressBook, int index) //For shifting(deleting) the contacts
+{
+    char res; //Declaration
+    printf("Are you sure want to delete? (Y or N):  "); //Asking user to confirm delete
+    scanf("%c", &res);
+
+    user_deleteopt:
+    //Validation
+    if(res == 'y' || res == 'Y') 
+    {
+        for(int i = index; i < addressBook -> contactCount - 1; i++)
+        {
+            addressBook -> contacts[i] = addressBook -> contacts[i + 1];
+        }
+    }
+    else if(res == 'n' || res == 'N')
+    {
+        printf("Process Denied!...\n");
+        return;
+    }
+    else
+    {
+        printf("Invalid Choice, Enter the valid choice\n");
+        goto user_deleteopt;
+    }
+
+    addressBook -> contactCount--; //decremeting the contact count
+}
+

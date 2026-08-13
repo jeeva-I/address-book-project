@@ -47,7 +47,15 @@ int main()
                 editContact(&addressBook, e_searchChoice);
                 break;
             case 4:
-                deleteContact(&addressBook);
+                printf("Select search criteria:\n");
+                printf("1. Search by name\n");
+                printf("2. Search by phone\n");
+                printf("3. Search by email\n");
+                printf("4. Exit\n");
+                printf("Enter your choice: ");
+                int d_search;
+                scanf("%d", &d_search);
+                deleteContact(&addressBook, d_search);
                 break;
             case 5:
                 printf("Select sort criteria:\n");
