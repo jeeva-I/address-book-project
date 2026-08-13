@@ -76,7 +76,7 @@ void listContacts(AddressBook *addressBook, int sortCriteria)
 void initialize(AddressBook *addressBook) 
 {
     addressBook->contactCount = 0;
-    populateAddressBook(addressBook);
+    loadContactsFromFile(addressBook);
     
     // Load contacts from file during initialization (After files)
     //loadContactsFromFile(addressBook);
@@ -698,7 +698,7 @@ void edit_option(Contact *contact) //for show the edit option to the user
         goto user_editoption;
     }
 }
-
+  
 void delete_option(AddressBook *addressBook, int index) //For shifting(deleting) the contacts
 {
     char res; //Declaration
